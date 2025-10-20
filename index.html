@@ -10,12 +10,25 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
   <style>
-    /* minimal layout tweaks */
+    /* Center all content */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #ffffff;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Wrapper for all charts */
     .page {
       max-width: 1200px;
       margin: 32px auto;
-      padding: 0 16px;
+      text-align: center;
     }
+
+    /* Grid layout for charts */
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -24,19 +37,23 @@
         "sc1  sc1"
         "sc2  sc2"
         "map  map";
-      gap: 24px;
-      align-items: start;
+      gap: 30px;
+      justify-items: center;
     }
-    /* chart cards (optional light padding) */
-    .chart { padding: 8px; }
-    /* place items */
+
+    .chart {
+      width: 100%;
+      max-width: 550px;
+    }
+
+    /* Assign grid areas */
     #bar_chart   { grid-area: bar1; }
     #bar_chart2  { grid-area: bar2; }
     #scatter_plot1 { grid-area: sc1; }
     #scatter_plot2 { grid-area: sc2; }
     #symbol_map    { grid-area: map; }
 
-    /* stack on small screens */
+    /* Responsive stacking */
     @media (max-width: 900px) {
       .grid {
         grid-template-columns: 1fr;
@@ -46,6 +63,9 @@
           "sc1"
           "sc2"
           "map";
+      }
+      .chart {
+        max-width: 90%;
       }
     }
   </style>
@@ -69,24 +89,19 @@
 
   <script type="text/javascript">
     var spec1 = "js/temperature_map.json";
-    vegaEmbed('#symbol_map', spec1).then(function (result) {
-    }).catch(console.error);
+    vegaEmbed('#symbol_map', spec1).catch(console.error);
 
     var spec2 = "js/temperature_vs_sunshine.json";
-    vegaEmbed('#scatter_plot1', spec2).then(function (result) {
-    }).catch(console.error);
+    vegaEmbed('#scatter_plot1', spec2).catch(console.error);
 
     var spec3 = "js/temperature_vs_rainfall.json";
-    vegaEmbed('#scatter_plot2', spec3).then(function (result) {
-    }).catch(console.error);
+    vegaEmbed('#scatter_plot2', spec3).catch(console.error);
 
     var spec4 = "js/max_temp_location.json";
-    vegaEmbed('#bar_chart', spec4).then(function (result) {
-    }).catch(console.error);
+    vegaEmbed('#bar_chart', spec4).catch(console.error);
 
     var spec5 = "js/monthly_temperature.json";
-    vegaEmbed('#bar_chart2', spec5).then(function (result) {
-    }).catch(console.error);
+    vegaEmbed('#bar_chart2', spec5).catch(console.error);
   </script>
 </body>
 </html>
