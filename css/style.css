@@ -22,11 +22,6 @@
 	width: 100%;
 }
 
-.chart .vega-embed,
-.chart>div {
-	width: 100%;
-}
-
 #bar_chart,
 #bar_chart2 {
 	max-width: 560px;
