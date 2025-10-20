@@ -5,47 +5,88 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-  
-  
+
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-  
+
+  <style>
+    /* minimal layout tweaks */
+    .page {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "bar1 bar2"
+        "sc1  sc1"
+        "sc2  sc2"
+        "map  map";
+      gap: 24px;
+      align-items: start;
+    }
+    /* chart cards (optional light padding) */
+    .chart { padding: 8px; }
+    /* place items */
+    #bar_chart   { grid-area: bar1; }
+    #bar_chart2  { grid-area: bar2; }
+    #scatter_plot1 { grid-area: sc1; }
+    #scatter_plot2 { grid-area: sc2; }
+    #symbol_map    { grid-area: map; }
+
+    /* stack on small screens */
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "bar1"
+          "bar2"
+          "sc1"
+          "sc2"
+          "map";
+      }
+    }
+  </style>
 </head>
+
 <body>
-  
-<div id="symbol_map"></div>
-<div id="scatter_plot1"></div>
-<div id="scatter_plot2"></div>
-<div id="bar_chart"></div>
-<div id="bar_chart2"></div>
+  <div class="page">
+    <div class="grid">
+      <!-- Bar charts first (side by side) -->
+      <div id="bar_chart" class="chart"></div>
+      <div id="bar_chart2" class="chart"></div>
 
-<script type="text/javascript">
+      <!-- Scatter plots (one per row) -->
+      <div id="scatter_plot1" class="chart"></div>
+      <div id="scatter_plot2" class="chart"></div>
 
-  var spec1 = "js/temperature_map.json";
-  vegaEmbed('#symbol_map', spec1).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
+      <!-- Map at the bottom -->
+      <div id="symbol_map" class="chart"></div>
+    </div>
+  </div>
 
-  var spec2 = "js/temperature_vs_sunshine.json";
-  vegaEmbed('#scatter_plot1', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
+  <script type="text/javascript">
+    var spec1 = "js/temperature_map.json";
+    vegaEmbed('#symbol_map', spec1).then(function (result) {
+    }).catch(console.error);
 
-  var spec3 = "js/temperature_vs_rainfall.json";
-  vegaEmbed('#scatter_plot2', spec3).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
+    var spec2 = "js/temperature_vs_sunshine.json";
+    vegaEmbed('#scatter_plot1', spec2).then(function (result) {
+    }).catch(console.error);
 
-  var spec4 = "js/max_temp_location.json";
-  vegaEmbed('#bar_chart', spec4).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
+    var spec3 = "js/temperature_vs_rainfall.json";
+    vegaEmbed('#scatter_plot2', spec3).then(function (result) {
+    }).catch(console.error);
 
-  var spec5 = "js/monthly_temperature.json";
-  vegaEmbed('#bar_chart2', spec5).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+    var spec4 = "js/max_temp_location.json";
+    vegaEmbed('#bar_chart', spec4).then(function (result) {
+    }).catch(console.error);
 
+    var spec5 = "js/monthly_temperature.json";
+    vegaEmbed('#bar_chart2', spec5).then(function (result) {
+    }).catch(console.error);
+  </script>
 </body>
 </html>

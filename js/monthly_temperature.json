@@ -1,62 +1,107 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Average Maximum Temperature by Location",
-  "data": {
-    "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv",
-    "format": { "type": "csv", "parse": { "MaxTemp": "number" } }
-  },
-  "params": [
-    {
-      "name": "viewMode",
-      "value": "top",
-      "bind": {
-        "input": "select",
-        "options": ["top", "selected"],
-        "labels": ["Top Warmest/Coolest", "Specific Cities"],
-        "name": "Display Mode: "
-      }
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Average Maximum Temperature by Location",
+    "data": {
+        "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv",
+        "format": {
+            "type": "csv",
+            "parse": {
+                "MaxTemp": "number"
+            }
+        }
+    },
+    "params": [
+        {
+            "name": "viewMode",
+            "value": "top",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "top",
+                    "selected"
+                ],
+                "labels": [
+                    "Top Warmest/Coolest",
+                    "Specific Cities"
+                ],
+                "name": "Display Mode: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": "isFinite(datum.MaxTemp)"
+        },
+        {
+            "aggregate": [
+                {
+                    "op": "mean",
+                    "field": "MaxTemp",
+                    "as": "AverageMaxTemp"
+                }
+            ],
+            "groupby": [
+                "Location"
+            ]
+        },
+        {
+            "window": [
+                {
+                    "op": "rank",
+                    "as": "rank"
+                }
+            ],
+            "sort": [
+                {
+                    "field": "AverageMaxTemp",
+                    "order": "descending"
+                }
+            ]
+        },
+        {
+            "calculate": "indexof(['Melbourne','Sydney','Perth','Darwin','Adelaide'], datum.Location) >= 0",
+            "as": "isSelectedCity"
+        },
+        {
+            "filter": "viewMode == 'top' ? datum.rank <= 10 : datum.isSelectedCity"
+        }
+    ],
+    "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
+    },
+    "encoding": {
+        "x": {
+            "field": "Location",
+            "type": "nominal",
+            "sort": "-y",
+            "title": "Location",
+            "axis": {
+                "labelAngle": -30
+            }
+        },
+        "y": {
+            "field": "AverageMaxTemp",
+            "type": "quantitative",
+            "title": "Average Maximum Temperature (°C)"
+        },
+        "color": {
+            "field": "AverageMaxTemp",
+            "type": "quantitative",
+            "title": "Avg Max Temp (°C)",
+            "scale": {
+                "scheme": "reds"
+            }
+        },
+        "tooltip": [
+            {
+                "field": "Location"
+            },
+            {
+                "field": "AverageMaxTemp",
+                "title": "Avg Max Temp (°C)",
+                "format": ".2f"
+            }
+        ]
     }
-  ],
-  "transform": [
-    { "filter": "isFinite(datum.MaxTemp)" },
-    {
-      "aggregate": [
-        { "op": "mean", "field": "MaxTemp", "as": "AverageMaxTemp" }
-      ],
-      "groupby": ["Location"]
-    },
-    { "window": [{"op": "rank", "as": "rank"}], "sort": [{"field": "AverageMaxTemp", "order": "descending"}] },
-    {
-      "calculate": "indexof(['Melbourne','Sydney','Perth','Darwin','Adelaide'], datum.Location) >= 0",
-      "as": "isSelectedCity"
-    },
-    {
-      "filter": "viewMode == 'top' ? datum.rank <= 10 : datum.isSelectedCity"
-    }
-  ],
-  "mark": { "type": "bar", "cornerRadiusEnd": 4 },
-  "encoding": {
-    "x": {
-      "field": "Location",
-      "type": "nominal",
-      "sort": "-y",
-      "title": "Location",
-      "axis": {"labelAngle": -30}
-    },
-    "y": {
-      "field": "AverageMaxTemp",
-      "type": "quantitative",
-      "title": "Average Maximum Temperature (°C)"
-    },
-    "color": {
-      "field": "AverageMaxTemp",
-      "type": "quantitative",
-      "title": "Avg Max Temp (°C)",
-      "scale": { "scheme": "reds" }
-    },
-    "tooltip": [
-      { "field": "Location" },
-      { "field": "AverageMaxTemp", "title": "Avg Max Temp (°C)", "format": ".2f" }
-    ]
-  }
 }

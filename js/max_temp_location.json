@@ -1,44 +1,86 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Top 10 Stations by Annual Mean Temperature",
-  "data": {
-    "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/mean_temp.csv",
-    "format": { "type": "csv", "parse": { "Annual": "number" } }
-  },
-  "transform": [
-    { "filter": "isFinite(datum.Annual)" },
-    {
-      "aggregate": [
-        { "op": "mean", "field": "Annual", "as": "AvgAnnualTemp" }
-      ],
-      "groupby": ["STATION_NAME"]
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Top 10 Stations by Annual Mean Temperature",
+    "data": {
+        "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/mean_temp.csv",
+        "format": {
+            "type": "csv",
+            "parse": {
+                "Annual": "number"
+            }
+        }
     },
-    { "window": [{ "op": "rank", "as": "rank" }], "sort": [{ "field": "AvgAnnualTemp", "order": "descending" }] },
-    { "filter": "datum.rank <= 10" }
-  ],
-  "mark": { "type": "bar", "cornerRadiusEnd": 4 },
-  "encoding": {
-    "x": {
-      "field": "STATION_NAME",
-      "type": "nominal",
-      "sort": "-y",
-      "title": "Station",
-      "axis": { "labelAngle": -25 }
+    "transform": [
+        {
+            "filter": "isFinite(datum.Annual)"
+        },
+        {
+            "aggregate": [
+                {
+                    "op": "mean",
+                    "field": "Annual",
+                    "as": "AvgAnnualTemp"
+                }
+            ],
+            "groupby": [
+                "STATION_NAME"
+            ]
+        },
+        {
+            "window": [
+                {
+                    "op": "rank",
+                    "as": "rank"
+                }
+            ],
+            "sort": [
+                {
+                    "field": "AvgAnnualTemp",
+                    "order": "descending"
+                }
+            ]
+        },
+        {
+            "filter": "datum.rank <= 10"
+        }
+    ],
+    "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
     },
-    "y": {
-      "field": "AvgAnnualTemp",
-      "type": "quantitative",
-      "title": "Annual Mean Temperature (°C)"
-    },
-    "color": {
-      "field": "AvgAnnualTemp",
-      "type": "quantitative",
-      "title": "Avg Annual Temp (°C)",
-      "scale": { "scheme": "reds" }
-    },
-    "tooltip": [
-      { "field": "STATION_NAME", "title": "Station" },
-      { "field": "AvgAnnualTemp", "title": "Avg Annual Temp (°C)", "format": ".2f" }
-    ]
-  }
+    "encoding": {
+        "x": {
+            "field": "STATION_NAME",
+            "type": "nominal",
+            "sort": "-y",
+            "title": "Station",
+            "axis": {
+                "labelAngle": -25
+            }
+        },
+        "y": {
+            "field": "AvgAnnualTemp",
+            "type": "quantitative",
+            "title": "Annual Mean Temperature (°C)"
+        },
+        "color": {
+            "field": "AvgAnnualTemp",
+            "type": "quantitative",
+            "title": "Avg Annual Temp (°C)",
+            "scale": {
+                "scheme": "reds"
+            }
+        },
+        "tooltip": [
+            {
+                "field": "STATION_NAME",
+                "title": "Station"
+            },
+            {
+                "field": "AvgAnnualTemp",
+                "title": "Avg Annual Temp (°C)",
+                "format": ".2f"
+            }
+        ]
+    }
 }

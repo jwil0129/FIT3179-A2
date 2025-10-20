@@ -43,9 +43,22 @@
             "legend": null
         },
         "tooltip": [
-            {"field": "Location", "title": "City"},
-            {"field": "Rainfall", "title": "Rainfall", "type": "quantitative", "format": ".1f"},
-            {"field": "MaxTemp", "title": "Temperature", "type": "quantitative", "format": ".1f"}
+            {
+                "field": "Location",
+                "title": "City"
+            },
+            {
+                "field": "Rainfall",
+                "title": "Rainfall",
+                "type": "quantitative",
+                "format": ".1f"
+            },
+            {
+                "field": "MaxTemp",
+                "title": "Temperature",
+                "type": "quantitative",
+                "format": ".1f"
+            }
         ]
     }
 }
