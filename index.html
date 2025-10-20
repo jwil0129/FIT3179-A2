@@ -14,17 +14,35 @@
 <body>
   
 <div id="symbol_map"></div>
-<div id="scatter_plot"></div>
+<div id="scatter_plot1"></div>
+<div id="scatter_plot2"></div>
+<div id="bar_chart"></div>
+<div id="bar_chart2"></div>
 
 <script type="text/javascript">
 
-  var spec2 = "js/temperature_map.json";
-  vegaEmbed('#symbol_map', spec2).then(function(result) {
+  var spec1 = "js/temperature_map.json";
+  vegaEmbed('#symbol_map', spec1).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
-  var spec3 = "js/temperature_vs_sunshine.json";
-  vegaEmbed('#scatter_plot', spec3).then(function(result) {
+  var spec2 = "js/temperature_vs_sunshine.json";
+  vegaEmbed('#scatter_plot1', spec2).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec3 = "js/temperature_vs_rainfall.json";
+  vegaEmbed('#scatter_plot2', spec3).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec4 = "js/max_temp_location.json";
+  vegaEmbed('#bar_chart', spec4).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec5 = "js/monthly_temperature.json";
+  vegaEmbed('#bar_chart2', spec4).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>

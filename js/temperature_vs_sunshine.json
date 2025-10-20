@@ -1,51 +1,104 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
-    "height": 400,
-    "title": "Rainfall affect on Max Temperature",
+    "title": "Sunshine vs Max Temperature",
     "data": {
-        "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv"
+        "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv",
+        "format": {
+            "type": "csv"
+        }
     },
     "params": [
         {
-            "name": "search",
-            "value": "",
+            "name": "citySelect",
             "bind": {
-                "placeholder": "name of city... "
+                "input": "select",
+                "options": [
+                    null,
+                    "Melbourne",
+                    "Sydney",
+                    "Perth",
+                    "Darwin",
+                    "Adelaide"
+                ],
+                "labels": [
+                    "All",
+                    "Melbourne",
+                    "Sydney",
+                    "Perth",
+                    "Darwin",
+                    "Adelaide"
+                ],
+                "name": "Select city: "
             }
         }
     ],
     "transform": [
         {
-            "filter": "search == '' || test(search, datum.location, 'i')"
+            "calculate": "toNumber(datum.Sunshine)",
+            "as": "SunshineNum"
+        },
+        {
+            "calculate": "toNumber(datum.MaxTemp)",
+            "as": "MaxTempNum"
+        },
+        {
+            "filter": "isFinite(datum.SunshineNum) && isFinite(datum.MaxTempNum)"
+        },
+        {
+            "filter": "citySelect == null || datum.Location == citySelect"
         }
     ],
-    "mark": {
-        "type": "point",
-        "filled": true,
-        "opacity": 0.7
-    },
-    "encoding": {
-        "x": {
-            "field": "Rainfall",
-            "type": "quantitative",
-            "title": "Rainfall"
+    "layer": [
+        {
+            "mark": {
+                "type": "point",
+                "filled": true,
+                "opacity": 0.6
+            },
+            "encoding": {
+                "x": {
+                    "field": "SunshineNum",
+                    "type": "quantitative",
+                    "title": "Sunshine (hours)"
+                },
+                "y": {
+                    "field": "MaxTempNum",
+                    "type": "quantitative",
+                    "title": "Max Temperature (°C)"
+                },
+                "color": {
+                    "field": "Location",
+                    "type": "nominal",
+                    "legend": null
+                },
+                "tooltip": [
+                    {
+                        "field": "Location"
+                    },
+                    {
+                        "field": "SunshineNum",
+                        "title": "Sunshine (h)",
+                        "format": ".1f"
+                    },
+                    {
+                        "field": "MaxTempNum",
+                        "title": "Max Temp (°C)",
+                        "format": ".1f"
+                    }
+                ]
+            }
         },
-        "y": {
-            "field": "MaxTemp",
-            "type": "quantitative",
-            "title": "Max Temperatue"
-        },
-        "color": {
-            "field": "Location",
-            "type": "nominal",
-            "title": "City",
-            "legend": null
-        },
-        "tooltip": [
-            {"field": "Location", "title": "City"},
-            {"field": "Rainfall", "title": "Rainfall", "type": "quantitative", "format": ".1f"},
-            {"field": "MaxTemp", "title": "Temperature", "type": "quantitative", "format": ".1f"}
-        ]
-    }
+        {
+  "transform": [
+    { "regression": "MaxTempNum", "on": "SunshineNum" }
+  ],
+  "mark": { "type": "line", "strokeDash": [4,4] },
+  "encoding": {
+    "x": { "field": "SunshineNum", "type": "quantitative" },
+    "y": { "field": "MaxTempNum",  "type": "quantitative" },
+    "color": { "value": "firebrick" }
+  }
+}
+
+    ]
 }
