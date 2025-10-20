@@ -4,20 +4,58 @@
     "height": 400,
     "title": "Rainfall affect on Max Temperature",
     "data": {
-        "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv"
+        "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv",
+        "format": {
+            "type": "csv",
+            "parse": {
+                "Rainfall": "number",
+                "MaxTemp": "number"
+            }
+        }
     },
     "params": [
         {
-            "name": "search",
-            "value": "",
-            "bind": {
-                "placeholder": "name of city... "
-            }
+            "name": "cityFilter",
+            "select": {
+                "type": "point",
+                "fields": [
+                    "Location"
+                ]
+            },
+            "bind": "legend"
         }
     ],
     "transform": [
         {
-            "filter": "search == '' || test(search, datum.location, 'i')"
+            "filter": {
+                "field": "Location",
+                "oneOf": [
+                    "Sydney",
+                    "Melbourne",
+                    "Brisbane",
+                    "Perth",
+                    "Adelaide",
+                    "Hobart",
+                    "Darwin",
+                    "Canberra"
+                ]
+            }
+        },
+        {
+            "calculate": "toNumber(datum.Rainfall)",
+            "as": "RainfallNum"
+        },
+        {
+            "calculate": "toNumber(datum.MaxTemp)",
+            "as": "MaxTempNum"
+        },
+        {
+            "filter": "isFinite(datum.RainfallNum) && isFinite(datum.MaxTempNum)"
+        },
+        {
+            "filter": {
+                "param": "cityFilter"
+            }
         }
     ],
     "mark": {
@@ -27,20 +65,32 @@
     },
     "encoding": {
         "x": {
-            "field": "Rainfall",
+            "field": "MaxTempNum",
             "type": "quantitative",
-            "title": "Rainfall"
+            "title": "Max Temperature (°C)",
+            "scale": {
+                "domain": [
+                    0,
+                    50
+                ]
+            }
         },
         "y": {
-            "field": "MaxTemp",
+            "field": "RainfallNum",
             "type": "quantitative",
-            "title": "Max Temperatue"
+            "title": "Rainfall (mm)",
+            "scale": {
+                "domain": [
+                    0,
+                    200
+                ]
+            }
         },
         "color": {
             "field": "Location",
             "type": "nominal",
-            "title": "City",
-            "legend": null
+            "title": "Click to filter cities",
+            "scale": { "domain": ["Sydney","Melbourne","Brisbane","Perth","Adelaide","Hobart","Darwin","Canberra"] }
         },
         "tooltip": [
             {
@@ -48,13 +98,13 @@
                 "title": "City"
             },
             {
-                "field": "Rainfall",
+                "field": "RainfallNum",
                 "title": "Rainfall",
                 "type": "quantitative",
                 "format": ".1f"
             },
             {
-                "field": "MaxTemp",
+                "field": "MaxTempNum",
                 "title": "Temperature",
                 "type": "quantitative",
                 "format": ".1f"
