@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -37,13 +37,18 @@
         "sc1  sc1"
         "sc2  sc2"
         "map  map";
-      gap: 30px;
+      gap: 40px; /* Increased gap for row spacing */
       justify-items: center;
+      align-items: center;
     }
 
     .chart {
-      width: 100%;
-      max-width: 550px;
+      width: 90%;             /* shrink width slightly */
+      max-width: 700px;       /* keep it consistent */
+      display: flex;          /* center internal Vega divs */
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
     }
 
     /* Assign grid areas */
@@ -65,8 +70,16 @@
           "map";
       }
       .chart {
-        max-width: 90%;
+        max-width: 95%;
       }
+    }
+
+    /* Add visible spacing between chart rows */
+    hr {
+      width: 80%;
+      border: none;
+      border-top: 2px solid #ddd;
+      margin: 40px auto;
     }
   </style>
 </head>
@@ -78,9 +91,14 @@
       <div id="bar_chart" class="chart"></div>
       <div id="bar_chart2" class="chart"></div>
 
+      <hr>
+
       <!-- Scatter plots (one per row) -->
       <div id="scatter_plot1" class="chart"></div>
+      <hr>
       <div id="scatter_plot2" class="chart"></div>
+
+      <hr>
 
       <!-- Map at the bottom -->
       <div id="symbol_map" class="chart"></div>
