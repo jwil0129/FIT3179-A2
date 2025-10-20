@@ -44,7 +44,7 @@
           "field": "Annual",
           "type": "quantitative",
           "title": "Mean Temperature (°C)",
-          "scale": { "range": [5, 500] } 
+          "scale": { "range": [20, 160] }
         },
         "color": {
           "field": "Annual",
