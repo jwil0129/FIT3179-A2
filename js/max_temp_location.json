@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Top 10 Stations by Annual Mean Temperature",
+    "title": "Stations with Highest Mean Temperature",
     "data": {
         "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/mean_temp.csv",
         "format": {
@@ -61,7 +61,7 @@
         "y": {
             "field": "AvgAnnualTemp",
             "type": "quantitative",
-            "title": "Annual Mean Temperature (°C)"
+            "title": "Mean Temperature (°C)"
         },
         "color": {
             "field": "AvgAnnualTemp",

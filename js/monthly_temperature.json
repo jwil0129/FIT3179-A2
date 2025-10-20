@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Average Maximum Temperature by Location",
+    "title": "Avg. Max Temperature by Location",
     "data": {
         "url": "https://raw.githubusercontent.com/jwil0129/FIT3179-A2/refs/heads/main/data/Weather%20Test%20Data.csv",
         "format": {
@@ -21,10 +21,10 @@
                     "selected"
                 ],
                 "labels": [
-                    "Top Warmest/Coolest",
-                    "Specific Cities"
+                    "Warmest/Coolest Cities",
+                    "Major Cities"
                 ],
-                "name": "Display Mode: "
+                "name": "City Filter: "
             }
         }
     ],
@@ -83,7 +83,7 @@
         "y": {
             "field": "AverageMaxTemp",
             "type": "quantitative",
-            "title": "Average Maximum Temperature (°C)"
+            "title": "Max Temperature (°C)"
         },
         "color": {
             "field": "AverageMaxTemp",
