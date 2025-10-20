@@ -1,37 +1,43 @@
 .page {
-  max-width: 1200px;
-  margin: 0 auto;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 16px
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px 32px;
-  justify-items: center;
-  align-items: start;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(560px, 1fr));
+	gap: 24px 32px;
+	justify-items: center;
+	align-items: start
 }
 
-#bar_chart,
-#bar_chart2,
+.chart {
+	width: 100%
+}
+
+.chart .vega-embed,
+.chart>div {
+	width: 100%
+}
+
 #scatter_plot1,
 #scatter_plot2,
-#symbol_map {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-}
-
-#bar_chart,
-#bar_chart2 {
-  max-width: 560px;
+#symbol_map,
+.section-divider {
+	grid-column: 1 / -1
 }
 
 .section-divider {
-  grid-column: 1 / -1;
-  width: 92%;
-  border: 0;
-  border-top: 2px solid #2b3648;
-  margin: 24px auto;
-  opacity: 0.8;
+	width: 92%;
+	border: 0;
+	border-top: 2px solid #2b3648;
+	opacity: .85;
+	margin: 24px auto
+}
+
+@media (max-width:1200px) {
+	.grid {
+		grid-template-columns: 1fr
+	}
 }
