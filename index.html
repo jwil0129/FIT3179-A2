@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
@@ -37,26 +38,44 @@
         "sc1  sc1"
         "sc2  sc2"
         "map  map";
-      gap: 40px; /* Increased gap for row spacing */
+      gap: 40px;
+      /* Increased gap for row spacing */
       justify-items: center;
       align-items: center;
     }
 
     .chart {
-      width: 90%;             /* shrink width slightly */
-      max-width: 700px;       /* keep it consistent */
-      display: flex;          /* center internal Vega divs */
+      width: 90%;
+      /* shrink width slightly */
+      max-width: 700px;
+      /* keep it consistent */
+      display: flex;
+      /* center internal Vega divs */
       justify-content: center;
       align-items: center;
       margin: 0 auto;
     }
 
     /* Assign grid areas */
-    #bar_chart   { grid-area: bar1; }
-    #bar_chart2  { grid-area: bar2; }
-    #scatter_plot1 { grid-area: sc1; }
-    #scatter_plot2 { grid-area: sc2; }
-    #symbol_map    { grid-area: map; }
+    #bar_chart {
+      grid-area: bar1;
+    }
+
+    #bar_chart2 {
+      grid-area: bar2;
+    }
+
+    #scatter_plot1 {
+      grid-area: sc1;
+    }
+
+    #scatter_plot2 {
+      grid-area: sc2;
+    }
+
+    #symbol_map {
+      grid-area: map;
+    }
 
     /* Responsive stacking */
     @media (max-width: 900px) {
@@ -69,6 +88,7 @@
           "sc2"
           "map";
       }
+
       .chart {
         max-width: 95%;
       }
@@ -85,6 +105,14 @@
 </head>
 
 <body>
+  <header>
+    <h1>Australian Climate Insights Dashboard</h1>
+    <h2>
+      Name: <strong>Julien Siew Wilson</strong>
+      The data used comes from the Australian Bureau of Meteorology and the Australia Climate Service
+    </h2>
+  </header>
+
   <div class="page">
     <div class="grid">
       <!-- Bar charts first (side by side) -->
@@ -122,4 +150,5 @@
     vegaEmbed('#bar_chart2', spec5).catch(console.error);
   </script>
 </body>
+
 </html>
