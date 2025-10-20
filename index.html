@@ -2,118 +2,11 @@
 <html>
 
 <head>
-  <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-  <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-
-  <style>
-    /* Center all content */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background-color: #ffffff;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Wrapper for all charts */
-    .page {
-      max-width: 1200px;
-      margin: 32px auto;
-      text-align: center;
-    }
-
-    /* Grid layout for charts */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "bar1 bar2"
-        "sc1  sc1"
-        "sc2  sc2"
-        "map  map";
-      gap: 40px;
-      /* Increased gap for row spacing */
-      justify-items: center;
-      align-items: center;
-    }
-
-    .chart {
-      width: 100%;
-      /* shrink width slightly */
-      max-width: 1000px;
-      /* keep it consistent */
-      display: flex;
-      /* center internal Vega divs */
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-    }
-
-    .chart > .vega-embed, .chart > div {
-  margin: 0 auto;
-}
-  .section-divider {
-  grid-column: 1 / -1;       /* span across both columns */
-  width: 92%;
-  border: 0;
-  border-top: 3px solid #2b3648;
-  margin: 28px auto;
-  opacity: 0.85;
-  border-radius: 2px;
-}
-    /* Assign grid areas */
-    #bar_chart {
-      grid-area: bar1;
-    }
-
-    #bar_chart2 {
-      grid-area: bar2;
-    }
-
-    #scatter_plot1 {
-      grid-area: sc1;
-    }
-
-    #scatter_plot2 {
-      grid-area: sc2;
-    }
-
-    #symbol_map {
-      grid-area: map;
-    }
-
-    /* Responsive stacking */
-    @media (max-width: 900px) {
-      .grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "bar1"
-          "bar2"
-          "sc1"
-          "sc2"
-          "map";
-      }
-
-      .chart {
-        max-width: 95%;
-      }
-    }
-
-    /* Add visible spacing between chart rows */
-    hr {
-      width: 80%;
-      border: none;
-      border-top: 2px solid #ddd;
-      margin: 40px auto;
-    }
-  </style>
 </head>
 
 <body>
@@ -131,13 +24,11 @@
 
   <div class="page">
     <div class="grid">
-      <!-- Bar charts first (side by side) -->
       <div id="bar_chart" class="chart"></div>
       <div id="bar_chart2" class="chart"></div>
 
       <hr class="section-divider">
 
-      <!-- Scatter plots (one per row) -->
       <div id="scatter_plot1" class="chart"></div>
       <div class="chart"></div>
       
@@ -148,7 +39,6 @@
 
       <hr class="section-divider">
 
-      <!-- Map at the bottom -->
       <div id="symbol_map" class="chart"></div>
       <div class="chart"></div>
     </div>
