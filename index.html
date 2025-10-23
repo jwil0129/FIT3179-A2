@@ -12,18 +12,17 @@
   <header>
     <h1>Australia Weather Temperature Analysis</h1>
     <p><strong>Author:</strong> Julien Siew Wilson</p>
-    <p>This data comes from the Australian Bureau of Meteorology (BoM) and the Australian Climate Service (ACS)</p>
+    <p>The data analysed is sourced from the Australian Bureau of Meteorology (BoM) and the Australian Climate Service (ACS)</p>
   </header>
 
   <div class="page">
     <div class="grid">
 
-      <!-- Row 1 -->
       <div class="card">
         <div id="bar_chart" class="chart"></div>
         <div class="insight">
-          Top stations by <b>annual mean temperature</b> cluster in Australia’s north and interior; 
-          values are tightly packed, suggesting small differences at the extreme warm end.
+          Top stations by <b>annual mean temperature</b> are more likely found in Australia’s north and interior; 
+          each station's values are tightly packed, suggesting small differences at higher temperatures.
         </div>
       </div>
 
@@ -32,39 +31,42 @@
         <div class="insight">
           Locations with the <b>highest average maximums</b> are largely NT/WA outposts 
           (e.g., Katherine/Darwin region), consistent with tropical and semi-arid climates.
+
+          Major Cities do show a better contrast of temperature, suggesting a locational affect
+          on the temperature across regions in Australia.
         </div>
       </div>
 
       <hr class="section-divider span-2">
 
-      <!-- Row 2 -->
       <div class="card span-2">
         <div id="scatter_plot1" class="chart"></div>
         <div class="insight">
-          <b>Sunshine vs Max Temperature:</b> gentle positive relationship — more sunshine generally 
-          accompanies higher max temperatures up to ~35 °C; variability increases in mid-ranges across cities.
+          With Sunshine as variable to temperature, this plot shows a slight positive relationship</b>
+          where more sunshine generally accompanies higher max temperatures up to ~35 °C; 
+          variability increases in mid-ranges across cities.
         </div>
       </div>
 
       <hr class="section-divider span-2">
 
-      <!-- Row 3 -->
       <div class="card span-2">
         <div id="scatter_plot2" class="chart"></div>
         <div class="insight">
-          <b>Rainfall vs Max Temperature:</b> heavier rain events appear at moderate temperatures; 
+          With Rainfall as a variable, this plot shows no clear relation to temperature 
+          heavier rain events appear at moderate temperatures instead; in fact, 
           the hottest days tend to have <b>lower rainfall</b>, hinting at drier hot conditions.
         </div>
       </div>
 
       <hr class="section-divider span-2">
 
-      <!-- Row 4 -->
       <div class="card span-2">
         <div id="symbol_map" class="chart"></div>
         <div class="insight">
-          <b>Mean temperature map:</b> warmer stations concentrate in the <b>Top End</b> and inland areas; 
-          cooler means appear in the <b>south</b> and higher-latitude coastal regions.
+          With tihs geological map, it is more likely seen that warmer stations concentrate in the 
+          <b>Top End</b> and <b>inland areas</b>; 
+          whereby, cooler means appear in the <b>south</b> and higher-latitude coastal regions.
         </div>
       </div>
     </div>
