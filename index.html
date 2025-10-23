@@ -11,54 +11,63 @@
 
 <body>
   <header>
-    <h1>
-    Australia Weather Temperature Analysis
-  </h1>
-  <p>
-    <strong>Author:</strong> Julien Siew Wilson
-  </p>
-  <p>
-    This data comes from the Australian Bureau of Meteorology (BoM) and the Australian Climate Service (ACS)
-  </p>
+    <h1>Australia Weather Temperature Analysis</h1>
+    <p><strong>Author:</strong> Julien Siew Wilson</p>
+    <p>This data comes from the Australian Bureau of Meteorology (BoM) and the Australian Climate Service (ACS)</p>
   </header>
 
   <div class="page">
     <div class="grid">
+      <!-- Row 1: bar charts -->
       <div id="bar_chart" class="chart"></div>
       <div id="bar_chart2" class="chart"></div>
 
-      <hr class="section-divider">
+      <!-- Row 1 insights (one per bar chart cell) -->
+      <div class="insight">
+        Top stations by **annual mean temperature** cluster in Australia’s north and interior; values are tightly packed, suggesting small differences at the extreme warm end.
+      </div>
+      <div class="insight">
+        Locations with the **highest average maximums** are largely NT/WA outposts (e.g., Katherine/Darwin region), consistent with tropical and semi-arid climates.
+      </div>
 
-      <div id="scatter_plot1" class="chart"></div>
-      <div class="chart"></div>
-      
-      <hr class="section-divider">
+      <hr class="section-divider span-2">
 
-      <div id="scatter_plot2" class="chart"></div>
-      <div class="chart"></div>
+      <!-- Row 2: scatter 1 (Sunshine vs Max Temp) -->
+      <div id="scatter_plot1" class="chart span-2"></div>
 
-      <hr class="section-divider">
+      <!-- Row 2 insight (full width) -->
+      <div class="insight span-2">
+        **Sunshine vs Max Temperature:** gentle positive relationship—more sunshine generally accompanies higher max temperatures up to ~35 °C; variability increases in mid-ranges across cities.
+      </div>
 
-      <div id="symbol_map" class="chart"></div>
-      <div class="chart"></div>
+      <hr class="section-divider span-2">
+
+      <!-- Row 3: scatter 2 (Rainfall vs Max Temp) -->
+      <div id="scatter_plot2" class="chart span-2"></div>
+
+      <!-- Row 3 insight (full width) -->
+      <div class="insight span-2">
+        **Rainfall vs Max Temperature:** heavier rain events appear at moderate temperatures; the hottest days tend to have **lower rainfall**, hinting at drier hot conditions.
+      </div>
+
+      <hr class="section-divider span-2">
+
+      <!-- Row 4: symbol map -->
+      <div id="symbol_map" class="chart span-2"></div>
+
+      <!-- Row 4 insight (full width) -->
+      <div class="insight span-2">
+        **Mean temperature map:** warmer stations concentrate in the **Top End** and inland areas; cooler means appear in the **south** and higher-latitude coastal regions.
+      </div>
     </div>
   </div>
 
   <script type="text/javascript">
-    var spec1 = "js/temperature_map.json";
-    vegaEmbed('#symbol_map', spec1).catch(console.error);
-
-    var spec2 = "js/temperature_vs_sunshine.json";
-    vegaEmbed('#scatter_plot1', spec2).catch(console.error);
-
-    var spec3 = "js/temperature_vs_rainfall.json";
-    vegaEmbed('#scatter_plot2', spec3).catch(console.error);
-
-    var spec4 = "js/max_temp_location.json";
-    vegaEmbed('#bar_chart', spec4).catch(console.error);
-
-    var spec5 = "js/monthly_temperature.json";
-    vegaEmbed('#bar_chart2', spec5).catch(console.error);
+    vegaEmbed('#symbol_map', 'js/temperature_map.json').catch(console.error);
+    vegaEmbed('#scatter_plot1', 'js/temperature_vs_sunshine.json').catch(console.error);
+    vegaEmbed('#scatter_plot2', 'js/temperature_vs_rainfall.json').catch(console.error);
+    vegaEmbed('#bar_chart',   'js/max_temp_location.json').catch(console.error);
+    vegaEmbed('#bar_chart2',  'js/monthly_temperature.json').catch(console.error);
   </script>
 </body>
 
